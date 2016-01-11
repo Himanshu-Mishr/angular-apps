@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html data-ng-app="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>iterating with ng-repeat directive</title>
+</head>
+<body>
+
+<div class="container"
+	data-ng-init="names=['Dave', 'Napur', 'Heedy', 'Shriva'];">
+
+	Name : <input type="text" data-ng-model="personName">
+	{{ personName }}
+
+	<br>
+	<h3>Looping withn ng-repeat directive</h3>
+	<ul>
+		<li data-ng-repeat="name in names">{{name}}</li>
+	</ul>
+</div>
+
+<script src="js/angular.min.js" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>
