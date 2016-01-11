@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html data-ng-app="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Scope, View and Controlle</title>
+
+</head>
+<body>
+
+	<div class="container" data-ng-controller="SimpleController">
+		<h3>Adding simple controller</h3>
+		<ul>
+			<li data-ng-repeat="cust in customers">
+				{{ cust.name }} - {{ cust.city }}
+			</li>
+		</ul>
+	</div>
+
+<script src="js/angular.min.js" type="text/javascript" charset="utf-8" async defer></script>
+<script>
+	var SimpleController = function($scope){
+		$scope.customers = [
+		  {'name': 'Christensen Poole', 'city': 'Welda'},
+		  {'name': 'Henrietta Spencer', 'city': 'Goochland'},
+		  {'name': 'Julie Church', 'city': 'Makena'},
+		  {'name': 'Oconnor Turner', 'city': 'Alamo'},
+		  {'name': 'Stewart Trujillo', 'city': 'Northridge'},
+		  {'name': 'Mandy Reed', 'city': 'Wakarusa'},
+		  {'name': 'Lidia Hebert', 'city': 'Chelsea'},
+		  {'name': 'Jackie Tillman', 'city': 'Noblestown'},
+		  {'name': 'Orr George', 'city': 'Delshire'},
+		  {'name': 'Kathy Adkins', 'city': 'Smock'},
+		  {'name': 'Chasity Maynard', 'city': 'Bonanza'},
+		  {'name': 'Shana Gregory', 'city': 'Gracey'},
+		  {'name': 'Barbara Key', 'city': 'Chaparrito'},
+		  {'name': 'Sellers Cross', 'city': 'Fairfield'},
+		  {'name': 'Bridgette Wall', 'city': 'Hiseville'},
+		  {'name': 'Bennett Casey', 'city': 'Greenwich'},
+		  {'name': 'Rush Berry', 'city': 'Mathews'},
+		  {'name': 'Kirkland Buchanan', 'city': 'Strong'},
+		  {'name': 'Moody Grant', 'city': 'Albrightsville'},
+		  {'name': 'Debra Reynolds', 'city': 'Loma'}
+		];
+	}
+</script>
+</body>
+</html>
