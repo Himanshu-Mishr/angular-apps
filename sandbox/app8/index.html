@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body ng-controller="editFormMain_PLController" style="background:#ECEFF1;" flex layout="column">
+<md-toolbar style="background: #3B78E7 !important;min-height: 48px !important;max-height: 48px !important;" class="md-whiteframe-2dp">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Cozee Homes</span>
+        </h2>
+        <span flex></span>
+      </div>
+</md-toolbar>
+
+<md-subheader md-no-sticky class="md-whiteframe-z1" layout-align="center center" style="background: #3B78E7 !important;">
+
+    <div layout="row" style="line-height:2em;color:white;font-size: 16px;">
+        <b>Add Property Details</b>
+    </div>
+
+    <div
+     layout="row" flex>
+
+        <span flex></span>
+
+        <span style="color:white;" flex md-no-ink="false" ng-click="change_stage(1);">
+            <div layout="row" layout-align="center center">
+                <span class="stage_number" ng-class="{'current_stage':current_stage_no==1,'done_stage':current_stage_no>1}">
+                <span ng-if="!(current_stage_no>1)"> 1 </span>
+                <md-icon md-font-set="material-icons" class="blue-done-icon" ng-if="current_stage_no>1"> done </md-icon>
+                </span>
+            </div>
+            <div layout="row" layout-align="center center" class="stage_name">Location details</div>
+        </span>
+
+        <span flex class="stage-section"></span>
+
+        <span style="color:white;" flex md-no-ink="false" ng-click="change_stage(2);">
+            <div layout="row" layout-align="center center">
+                <span class="stage_number" ng-class="{'current_stage':current_stage_no==2,'done_stage':current_stage_no>2}">
+                <span ng-if="!(current_stage_no>2)"> 2 </span>
+                <md-icon md-font-set="material-icons" class="blue-done-icon" ng-if="current_stage_no>2"> done </md-icon>
+                </span>
+            </div>
+            <div layout="row" layout-align="center center" class="stage_name">Fixed details</div>
+        </span>
+
+        <span flex class="stage-section"></span>
+
+        <span style="color:white;" flex md-no-ink="false" ng-click="change_stage(3);">
+            <div layout="row" layout-align="center center">
+                <span class="stage_number" ng-class="{'current_stage':current_stage_no==3,'done_stage':current_stage_no>3}">
+                <span ng-if="!(current_stage_no>3)"> 3 </span>
+                <md-icon md-font-set="material-icons" class="blue-done-icon" ng-if="current_stage_no>3"> done </md-icon>
+                </span>
+            </div>
+            <div layout="row" layout-align="center center" class="stage_name">Volatile details</div>
+        </span>
+
+        <span flex class="stage-section"></span>
+
+
+        <span style="color:white;" flex md-no-ink="false" ng-click="change_stage(4);">
+            <div layout="row" layout-align="center center">
+                <span class="stage_number" ng-class="{'current_stage':current_stage_no==4,'done_stage':current_stage_no>4}">
+                <span ng-if="!(current_stage_no>4)"> 4 </span>
+                <md-icon md-font-set="material-icons" class="blue-done-icon" ng-if="current_stage_no>4"> done </md-icon>
+                </span>
+            </div>
+            <div layout="row" layout-align="center center" class="stage_name">Tenancy Terms</div>
+        </span>
+
+        <span flex class="stage-section"></span>
+
+        <span style="color:white;" flex md-no-ink="false" ng-click="change_stage(5);">
+            <div layout="row" layout-align="center center">
+                <span class="stage_number" ng-class="{'current_stage':current_stage_no==5,'done_stage':current_stage_no>5}">
+                <span ng-if="!(current_stage_no>5)"> 5 </span>
+                <md-icon md-font-set="material-icons" class="blue-done-icon" ng-if="current_stage_no>5"> done </md-icon>
+                </span>
+            </div>
+            <div layout="row" layout-align="center center" class="stage_name">Photo Uploads</div>
+        </span>
+
+        <span flex class="stage-section"></span>
+
+        <span style="color:white;" flex md-no-ink="false" ng-click="change_stage(6);">
+            <div layout="row" layout-align="center center">
+                <span class="stage_number" ng-class="{'current_stage':current_stage_no==6,'done_stage':current_stage_no>6}">
+                <span ng-if="!(current_stage_no>6)"> 6 </span>
+                <md-icon md-font-set="material-icons" class="blue-done-icon" ng-if="current_stage_no>6"> done </md-icon>
+                </span>
+            </div>
+            <div layout="row" layout-align="center center" class="stage_name">Overview</div>
+        </span>
+
+        <span flex></span>
+
+    </div>
+</md-subheader>
+
+<span style="overflow-x: hidden;">
+
+    <!-- Stage 1 -->
+    <div ng-controller="editFormSection1_PLController" layout="row" ng-show="current_stage_no==1" layout-margin>
+
+        <div layout="column" flex>
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:white;">
+
+                    <input id="pac-input" class="controls chg-input-text" flex style="min-height:6vh;" type="text" placeholder="Enter a location">
+                </div>
+                <md-divider></md-divider>
+                <div id="map" flex style="height:49.1vh;"></div>
+
+            </span>
+        </div>
+
+
+
+        <div layout="column" flex>
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Address</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Apartment Name</label>
+                        <input type="text" ng-model="property.apartment_name" class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Location</label>
+                        <input type="text" ng-model="property.location" class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Address</label>
+                        <input type="text" ng-model="property.address" class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;padding-top:18px;"">
+                    <div layout="column" flex style="padding-right:9px;">
+                        <label class="label_name">Pincode</label>
+                        <input type="text" ng-model="property.pincode" class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex="25" style="padding-left:9px;">
+                        <label class="label_name">Latitude</label>
+                        <input type="text" ng-disabled="true" ng-model="property.latitude" class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex="25">
+                        <label class="label_name">Longitude</label>
+                        <input type="text" ng-disabled="true" ng-model="property.longitude" class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">House No</label>
+                        <input type="text" ng-model="property.house_no" class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Floor No</label>
+                        <input type="text" ng-model="property.floor" class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+                <br>
+            </span>
+        </div>
+    </div>
+    <div layout="row" ng-show="current_stage_no==1" layout-margin>
+        <span flex></span>
+        <md-button class="md-raised" ng-click="next_stage()" style="background:#3B78E7;color:white;">
+            Continue
+        </md-button>
+    </div>
+
+    <!----------------------------------- Stage 2 ---------------------------->
+    <div ng-controller="editFormSection2_PLController as editFormSection2" layout="row" ng-show="current_stage_no==2" layout-margin>
+        <div layout="column" flex="25">
+        </div>
+        <div layout="column" flex>
+            <span class="md-whiteframe-z1">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Property Source & Type</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Listing Source</label>
+                        <md-input-container class="chg-md-input-container">
+                            <md-select class="chg-input-select" ng-model="property.lead_source">
+                              <md-option ng-repeat="source in [ 'Online Portal', 'Referral from Existing customer', 'Property Manager', 'Cozee Homes website', 'Other']" value="{{source}}">
+                                {{source}}
+                              </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Listing Type</label>
+                        <md-input-container class="chg-md-input-container">
+                            <md-select class="chg-input-select" ng-model="property.listing_type">
+                              <md-option ng-repeat="listing_type in ['Independent House', 'Apartment', 'Gated Society']" value="{{listing_type}}">
+                                {{listing_type}}
+                              </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+            </span>
+            <br>
+            <span class="md-whiteframe-z1">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Property Details</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+
+                <div layout="row" style="background:white;padding:18px;">
+                    <div layout="column" flex>
+                        <label class="label_name">No. Of Bedrooms</label>
+                        <input ng-model="property.no_of_beds"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">No. Of Bathrooms</label>
+                        <input ng-model="property.no_of_bathroom" type="number" class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Built-up Area</label>
+                        <input  ng-model="property.build_up_area" class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Furnishing Type</label>
+                        <md-input-container class="chg-md-input-container">
+                            <md-select class="chg-input-select"  ng-model="property.furnishedType">
+                              <md-option ng-repeat="furnishedType in ['Semi-Furnished', 'Fully-Furnished', 'Unfurnished']" value="{{furnishedType}}">
+                                {{furnishedType}}
+                              </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Facing</label>
+                        <md-input-container class="chg-md-input-container">
+                            <md-select class="chg-input-select" ng-model="property.facing">
+                              <md-option ng-repeat="facingType in ['North', 'East', 'West', 'South', 'Northeast', 'Southeast', 'Northwest', 'Southwest']" value="{{facingType}}">
+                                {{facingType}}
+                              </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Date from which property is available</label>
+                        <md-datepicker class="chg-input-select" ng-model="property.available_date" md-placeholder="Available from"></md-datepicker>
+                    </div>
+                    <div layout="column" flex>
+
+                    </div>
+                </div>
+            </span>
+
+            <br>
+
+            <span class="md-whiteframe-z1">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Tag Owner & Property Manager</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+
+                <div layout="row" style="background:white;padding:18px;">
+                    <md-contact-chips
+                         flex
+                        ng-model="property.owner_id_list"
+                        md-contacts="editFormSection2.delayedQuerySearch($query)"
+                        md-contact-name="name"
+                        md-contact-image="image"
+                        md-contact-email="email"
+                        md-require-match="true"
+                        md-highlight-flags="i"
+                        placeholder="Tag Owners"
+                        filter-selected="editFormSection2.filterSelected">
+                    </md-contact-chips>
+                </div>
+
+
+                <div layout="row" style="background:white;padding:18px;">
+                    <md-contact-chips
+                         flex
+                        ng-model="property.pmanager_id_list"
+                        md-contacts="editFormSection2.delayedQuerySearch($query)"
+                        md-contact-name="name"
+                        md-contact-image="image"
+                        md-contact-email="email"
+                        md-require-match="true"
+                        md-highlight-flags="i"
+                        placeholder="Tag Property Manager"
+                        filter-selected="editFormSection2.filterSelected">
+                    </md-contact-chips>
+                </div>
+            </span>
+
+        </div>
+
+        <div layout="column" flex="25">
+        </div>
+    </div>
+    <div layout="row" ng-show="current_stage_no==2" layout-margin>
+        <span flex></span>
+        <md-button ng-click="previous_stage()">
+            Back
+        </md-button>
+        <md-button class="md-raised" ng-click="next_stage()" style="background:#3B78E7;color:white;">
+            Continue
+        </md-button>
+    </div>
+
+
+    <!----------------------------------- Stage 3 ---------------------------->
+    <div ng-controller="editFormSection3_PLController" layout="row" ng-show="current_stage_no==3" layout-margin>
+        <div layout="column" flex="25">
+        </div>
+        <div layout="column" flex>
+
+            <span class="md-whiteframe-z1">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Owner's Preference</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+
+                <div layout="row" style="background:white;padding:18px;">
+                    <div layout="column" flex>
+                        <label class="label_name" style="padding-bottom:14px;">Eating Preference</label>
+                        <md-radio-group ng-model="property.eating_preference" class="md-primary">
+                          <md-radio-button value="Only vegetarians">Only vegetarians </md-radio-button>
+                          <md-radio-button value="No preference">No preference </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                      <div layout="column" flex>
+                        <label class="label_name" style="padding-bottom:14px;">Bachelors allowed</label>
+                        <md-radio-group ng-model="property.bachelors">
+                          <md-radio-button ng-value="{{true}}">Yes </md-radio-button>
+                          <md-radio-button ng-value="{{false}}">No </md-radio-button>
+                        </md-radio-group>
+                      </div>
+                      <div layout="column" flex>
+                        <label class="label_name" style="padding-bottom:14px;">Pets allowed</label>
+                        <md-radio-group ng-model="property.pets">
+                          <md-radio-button ng-value="{{true}}">Yes </md-radio-button>
+                          <md-radio-button ng-value="{{false}}">No </md-radio-button>
+                        </md-radio-group>
+                      </div>
+                </div>
+            </span>
+
+            <br>
+
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">    Flat Amenities</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;padding-top:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.television" aria-label="Checkbox 1">
+                        Television
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.washing_machine" aria-label="Checkbox 1">
+                        Washing Machine
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.geyser" aria-label="Checkbox 1">
+                        Geyser
+                      </md-checkbox>
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.ac" aria-label="Checkbox 1">
+                        A.C.
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.dining_table" aria-label="Checkbox 1">
+                        Dining Table
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.beds" aria-label="Checkbox 1">
+                        Beds
+                      </md-checkbox>
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.sofa" aria-label="Checkbox 1">
+                        Sofa
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.refrigerator" aria-label="Checkbox 1">
+                        Refrigerator
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.mircowave" aria-label="Checkbox 1">
+                        Microwave Oven
+                      </md-checkbox>
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.cupboards" aria-label="Checkbox 1">
+                        Cupboards
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.cable" aria-label="Checkbox 1">
+                        Cable/DTH
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.chimney" aria-label="Checkbox 1">
+                        Chimney
+                      </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.internet" aria-label="Checkbox 1">
+                        Internet
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.gas_stove" aria-label="Checkbox 1">
+                        Gas Stove
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.cook_top" aria-label="Checkbox 1">
+                        Cook top
+                      </md-checkbox>
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.flat_amenity.servant_room" aria-label="Checkbox 1">
+                        Servent Room
+                      </md-checkbox>
+                    </div>
+                </div>
+            </span>
+
+            <br>
+
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">    Society Amenities</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;padding-top:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.garden" aria-label="Social Amenity Checkbox">
+                        Garden
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.power_backup" aria-label="Social Amenity Checkbox">
+                        Power backup
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.maintenance" aria-label="Social Amenity Checkbox">
+                        Maintenance
+                      </md-checkbox>
+                    </div>
+                </div>
+
+
+
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.security" aria-label="Social Amenity Checkbox">
+                        Security
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.club_house" aria-label="Social Amenity Checkbox">
+                        Club House
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.cafeteria" aria-label="Social Amenity Checkbox">
+                        Cafeteria
+                      </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.library" aria-label="Social Amenity Checkbox">
+                        Library
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.community_hall" aria-label="Social Amenity Checkbox">
+                        Community hall
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.swimming_pool" aria-label="Social Amenity Checkbox">
+                        Swimming pool
+                      </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.health_facilities" aria-label="Social Amenity Checkbox">
+                        Health facilities
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.tennis_court" aria-label="Social Amenity Checkbox">
+                        Tennis court
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.badminton_court" aria-label="Social Amenity Checkbox">
+                        Badminton court
+                      </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.indoor_games" aria-label="Social Amenity Checkbox">
+                        Indoor games
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.basket_ball" aria-label="Social Amenity Checkbox">
+                        Basket ball
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.play_area" aria-label="Social Amenity Checkbox">
+                        Play area
+                      </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.intercom" aria-label="Social Amenity Checkbox">
+                        Intercom
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.wifi" aria-label="Social Amenity Checkbox">
+                        Wifi
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.broadband" aria-label="Social Amenity Checkbox">
+                        Broadband
+                      </md-checkbox>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;padding-left:18px;padding-right:18px;">
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.gymnasium" aria-label="Social Amenity Checkbox">
+                        Gymnasium
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                      <md-checkbox class="md-primary" ng-model="property.social_amenity.rain_water_harvest" aria-label="Social Amenity Checkbox">
+                        Rain water harvest
+                      </md-checkbox>
+                    </div>
+                    <div flex-xs flex>
+                    </div>
+                </div>
+            </span>
+        </div>
+        <div layout="column" flex="25">
+        </div>
+    </div>
+    <div layout="row" ng-show="current_stage_no==3" layout-margin>
+        <span flex></span>
+        <md-button ng-click="previous_stage()">
+            Back
+        </md-button>
+        <md-button class="md-raised" ng-click="next_stage()" style="background:#3B78E7;color:white;">
+            Continue
+        </md-button>
+    </div>
+
+
+
+
+
+    <!------------------------------------ Stage 4 -------------------------->
+    <div ng-controller="editFormSection4_PLController" layout="row" ng-show="current_stage_no==4" layout-margin>
+        <div layout="column" flex="20">
+        </div>
+
+        <div layout="column" flex>
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:#fafafa;">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Tenancy terms</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <md-icon md-font-set="material-icons">clear</md-icon>
+                    </md-button>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Rent From Tenants</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Deposit From Tenants</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Rent From Owner</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Deposit From Owner</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Society Maintenance Charge</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Rent Payment Model</label>
+                        <md-input-container class="chg-md-input-container">
+                            <md-select class="chg-input-select" ng-model="ctrl.userState">
+                              <md-option ng-repeat="source in [ 'Pay and Stay', 'Stay and Pay' ]" value="{{source}}">
+                                {{source}}
+                              </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Service Fee From Tenant</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Annual Rent Increase</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Service Fee From Owner</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                </div>
+
+                <div layout="row" style="background:white;" layout-padding>
+                    <div layout="column" flex>
+                        <label class="label_name">Service Fee To Property Manager</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name">Monthly Fee To Property Manager</label>
+                        <input type="text"  class="chg-input-text"  placeholder="">
+                    </div>
+                    <div layout="column" flex>
+                        <label class="label_name" style="padding-bottom:14px;">Pricing Plan</label>
+                        <md-radio-group class="md-primary" layout='row' ng-model="property.tenancy_terms.pricing_plan">
+                          <md-radio-button value="Fixed"> Fixed </md-radio-button>
+                          <md-radio-button value="Flexi"> Flexi </md-radio-button>
+                        </md-radio-group>
+                    </div>
+                </div>
+            </span>
+        </div>
+        <div layout="column" flex="20">
+        </div>
+
+    </div>
+    <div layout="row" ng-show="current_stage_no==4" layout-margin>
+        <span flex></span>
+        <md-button ng-click="previous_stage()">
+            Back
+        </md-button>
+        <md-button class="md-raised" ng-click="next_stage()" style="background:#3B78E7;color:white;">
+            Continue
+        </md-button>
+    </div>
+
+    <!------------------------------------- Stage 5 -------------------------->
+    <div ng-controller="editFormSection5_PLController" layout="row" ng-show="current_stage_no==5" layout-margin>
+        <div layout="column" flex="15">
+        </div>
+
+        <div layout="column" flex>
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:#fafafa;" ng-if="!isAnyOnRowIsTrue(checkBoxItem_PhotoList)">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">Add Images to upload</span>
+                    <span flex></span>
+
+                    <input type="file" file-upload id="fileUploader" multiple style="display: none;">
+
+                     <md-button ng-click="openFileDialog()" class="md-raised" style="background:#3B78E7;color:white;">
+                       &nbsp; <md-icon md-font-set="material-icons" style="color:white;">file_upload</md-icon> Upload file &nbsp;
+                    </md-button>
+
+                </div>
+                <div layout="row" style="background:#0288D1;" ng-if="isAnyOnRowIsTrue(checkBoxItem_PhotoList)">
+                    <md-button class="md-icon-button" ng-click="cleanAllCheckBox(checkBoxItem_PhotoList);">
+                        <md-icon md-font-set="material-icons" style="color:white">clear</md-icon>
+                    </md-button>
+                    <md-divider style="background:#B3E5FC !important;"></md-divider>
+                    <md-button ng-click="deleteSelectedPhotos_PhotoList(checkBoxItem_PhotoList)" class="md-raised" style="color:#3B78E7;background:white;">
+                       &nbsp; <md-icon md-font-set="material-icons" style="color:#3B78E7;">delete</md-icon> Delete Photos &nbsp;
+                    </md-button>
+                    <span flex></span>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" style="background:#fafafa;height:5vh;">
+                    <div layout="column" flex="5" class="table_header">
+                      <md-checkbox class="md-primary" ng-model="checkBoxItem_PhotoList_main" aria-label="Social Amenity Checkbox"></md-checkbox>
+                    </div>
+                    <div layout="column" flex="30" layout-align="center left" class="table_header">Name</div>
+                    <div layout="column" flex="20" layout-align="center center" class="table_header">On Server</div>
+                    <div layout="column" flex="15" layout-align="center center" class="table_header">Thumbnail</div>
+                    <div layout="column" flex="15" layout-align="center center" class="table_header">Medium</div>
+                    <div layout="column" flex="15" layout-align="center center" class="table_header">Original</div>
+                </div>
+                <div layout="row" style="background:white;height:5vh;" layout-align="center left" ng-repeat="(key, value) in photoUploadGroupDataStructure" ng-class="{'blue_table_body':checkBoxItem_PhotoList[key]}">
+                    <div layout="column" flex="5" class="table_body">
+                      <md-checkbox class="md-primary" ng-model="checkBoxItem_PhotoList[key]" aria-label="Social Amenity Checkbox"></md-checkbox>
+                    </div>
+                    <div layout="column" flex="30" layout-align="center left" class="table_body">{{key}}<span flex></span></div>
+                    <div layout="column" flex="20" layout-align="center left" class="table_body"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="value.thumbnail"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="!value.thumbnail"><md-icon md-font-set="material-icons" style="color:red;">clear</md-icon></div>
+
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="value.medium"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="!value.medium"><md-icon md-font-set="material-icons" style="color:red;">clear</md-icon></div>
+
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="value.original"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="!value.original"><md-icon md-font-set="material-icons" style="color:red;">clear</md-icon>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;height:20vh;" layout-align="center" ng-if="isObjectEmpty(photoUploadGroupDataStructure)">
+                    <span flex layout="column" layout-align="center">
+                        <span layout="row"><md-icon style="font-size:32px;" md-font-set="material-icons">add_a_photo</md-icon></span>
+                        <br>
+                        <span layout="row" layout-align="center" style="color:#9E9E9E;">No image selected</span>
+                    </span>
+                </div>
+
+            </span>
+
+            <br>
+            <span class="md-whiteframe-z1" style="background:white;">
+                <div layout="row" style="background:#fafafa;" ng-if="!isAnyOnRowIsTrue(checkBoxItem)">
+                    <span layout="column" flex layout-align="center left" class="form_header" style="padding-left:15px;">    Images on server </span>
+                    <span flex></span>
+                    <md-button class="md-icon-button">
+                        <!-- <md-icon md-font-set="material-icons">clear</md-icon> --> &nbsp;
+                    </md-button>
+                </div>
+                <div layout="row" style="background:#0288D1;" ng-if="isAnyOnRowIsTrue(checkBoxItem)">
+                    <md-button class="md-icon-button" ng-click="cleanAllCheckBox(checkBoxItem);">
+                        <md-icon md-font-set="material-icons" style="color:white">clear</md-icon>
+                    </md-button>
+                    <md-divider style="background:#B3E5FC !important;"></md-divider>
+                    <md-button ng-click="deleteSelectedPhotos(checkBoxItem)" class="md-raised" style="color:#3B78E7;background:white;">
+                       &nbsp; <md-icon md-font-set="material-icons" style="color:#3B78E7;">delete</md-icon> Delete Photos &nbsp;
+                    </md-button>
+                    <span flex></span>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" style="background:#fafafa;height:5vh;">
+                    <div layout="column" flex="5" class="table_header">
+                      <md-checkbox class="md-primary" ng-model="checkBoxItem_main" aria-label="Social Amenity Checkbox"></md-checkbox>
+                    </div>
+                    <div layout="column" flex="30" layout-align="center left" class="table_header">Name</div>
+                    <div layout="column" flex="20" layout-align="center center" class="table_header">On Server</div>
+                    <div layout="column" flex="15" layout-align="center center" class="table_header">Thumbnail</div>
+                    <div layout="column" flex="15" layout-align="center center" class="table_header">Medium</div>
+                    <div layout="column" flex="15" layout-align="center center" class="table_header">Original</div>
+                </div>
+                <div layout="row" style="background:white;height:5vh;" layout-align="center left" ng-repeat="(key, value) in photoGroupDataStructure" ng-class="{'blue_table_body':checkBoxItem[key]}">
+                    <div layout="column" flex="5" class="table_body">
+                      <md-checkbox class="md-primary" ng-model="checkBoxItem[key]" aria-label="Social Amenity Checkbox"></md-checkbox>
+                    </div>
+                    <div layout="column" flex="30" layout-align="center left" class="table_body">{{key}}<span flex></span></div>
+                    <div layout="column" flex="20" layout-align="center left" class="table_body"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="value.thumbnail"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="!value.thumbnail"><md-icon md-font-set="material-icons" style="color:red;">clear</md-icon></div>
+
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="value.medium"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="!value.medium"><md-icon md-font-set="material-icons" style="color:red;">clear</md-icon></div>
+
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="value.original"><md-icon md-font-set="material-icons" style="color:green;">done</md-icon></div>
+                    <div layout="column" flex="15" layout-align="center left" class="table_body" ng-if="!value.original"><md-icon md-font-set="material-icons" style="color:red;">clear</md-icon>
+                    </div>
+                </div>
+                <div layout="row" style="background:white;height:20vh;" layout-align="center" ng-if="isObjectEmpty(photoGroupDataStructure)">
+                    <span flex layout="column" layout-align="center">
+                        <span layout="row"><md-icon style="font-size:32px;" md-font-set="material-icons">help</md-icon></span>
+                        <br>
+                        <span layout="row" layout-align="center" style="color:#9E9E9E;">There is no image on server for this property.</span>
+                    </span>
+                </div>
+
+            </span>
+
+        </div>
+        <div layout="column" flex="15">
+        </div>
+    </div>
+    <div layout="row" ng-show="current_stage_no==5" layout-margin>
+        <span flex></span>
+        <md-button ng-click="previous_stage()">
+            Back
+        </md-button>
+        <md-button class="md-raised" ng-click="next_stage()" style="background:#3B78E7;color:white;">
+            Continue
+        </md-button>
+    </div>
+
+    <!------------------------------------- Stage 6 -------------------------->
+    <div ng-controller="editFormSection6_PLController" layout="row" ng-show="current_stage_no==6" layout-margin>
+        <div layout="column" flex="15">
+        </div>
+
+        <div layout="column" flex>
+        </div>
+
+        <div layout="column" flex="15">
+        </div>
+    </div>
+
+    <div layout="row" ng-show="current_stage_no==6" layout-margin>
+        <span flex></span>
+        <md-button ng-click="previous_stage()">
+            Back
+        </md-button>
+        <md-button class="md-raised" style="background:#3B78E7;color:white;">
+            Submit
+        </md-button>
+    </div>
+
+
+    <br>
+    <br>
+</span>
+
+</body>
+</html>

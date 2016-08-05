@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Angular JS Libs -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+
+    <!-- custom JS files -->
+    <script src="app.js" type="text/javascript"></script>
+    <style>
+    #id1 {
+      background-color: red;
+    }
+    #id2 {
+      background-color: green;
+    }
+    #id3 {
+      background-color: blue;
+    }
+    #id4 {
+      background-color: yellow;
+    }
+    </style>
+</head>
+
+<!--////////////////////////////////////////////////////////////////////////-->
+<body ng-app="MyApp" class="icondemoFontIconsWithLigatures" ng-cloak>
+<!--////////////////////////////////////////////////////////////////////////-->
+<div layout="column">
+
+        <div layout="row">
+          <div layout="column" flex id="id1">
+          bhk details and single or mutiple details
+          </div>
+          <div flex layout="column">
+
+          </div>
+          <div layout="column" flex id="id2">
+          owner's name
+          </div>
+        </div>
+        <div layout="row">
+          <div layout="column" id="id3" flex>
+          location
+          </div>
+          <div layout="column" flex>
+
+          </div>
+          <div layout="column" id="id4" flex>
+          stage
+          </div>
+        </div>
+</div>
+</body>
+</html>

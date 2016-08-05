@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body ng-controller="MyController">
+
+    <input type="file" file-upload  multiple/>
+        <ul>
+            <li ng-repeat="(key, file) in files">{{file.name}} | {{ file.webkitRelativePath}}<md-button class="md-mini" md-no-ink="true" md-ripple-size="full" ng-click="removeThisFile(key);">
+            <md-icon md-font-set="material-icons"> Close </md-icon>
+            </md-button></li>
+        </ul>
+
+    <br>
+
+    <br>
+    <md-button class="md-raised" md-ripple-size="full" ng-click="showFileData()">Show Data</md-button>
+    <md-button class="md-raised" md-ripple-size="full" ng-click="save()">Save Data</md-button>
+
+</body>
+</html>

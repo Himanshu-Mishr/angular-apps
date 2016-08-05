@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body ng-controller="main_controller" ng-cloak style="background: #fafafa" layout-padding layout="column">
+	<div layout="row">
+		<span style="font-size: 50px;" flex>{{ controller_name }} </span>
+		<div style="font-size: 50px;" flex> x = {{ x }}  </div>
+		<md-button class="md-raised" ng-click="main_incr();"> Click to increment (main) </md-button>
+	</div>
+	<div ng-controller="sub1_controller" style="background: #FFF176;margin-left: 70px;" flex layout="row">
+		<span style="font-size: 50px;" flex> {{ controller_name }} </span>
+		<div style="font-size: 50px;" flex> x = {{ x }}  </div>
+		<md-button class="md-raised" ng-click="sub1_incr();"> Click to increment (sub1) </md-button>
+	</div>
+	<div ng-controller="sub2_controller" style="background: #FF8A65;margin-left: 70px;" flex layout="row">
+		<span style="font-size: 50px;" flex> {{ controller_name }} </span>
+		<div style="font-size: 50px;" flex> x = {{ x }}  </div>
+		<md-button class="md-raised" ng-click="sub2_incr();"> Click to increment (sub2)  </md-button>
+	</div>
+	<div ng-controller="sub3_controller" style="background: #AED581;margin-left: 70px;" flex layout="row">
+		<span style="font-size: 50px;" flex> {{ controller_name }} </span>
+		<div style="font-size: 50px;" flex> x = {{ x }}  </div>
+		<md-button class="md-raised" ng-click="sub3_incr();"> Click to increment (sub3)  </md-button>
+	</div>
+
+</body>
+</html>

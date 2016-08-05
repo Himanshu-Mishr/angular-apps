@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="/bower_components/angular-material-data-table/dist/md-data-table.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- MAaterial Angular JS required files -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <script src="/bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+
+
+    <script src="app.js" type="text/javascript"></script>
+</head>
+    <body layout="row">
+
+    <div ng-controller="mainController as main" ng-cloak layout="column">
+        {{main.customerData}}
+
+        <input type="text" ng-model="filter.name">
+<md-table-container>
+  <table md-table>
+    <thead md-head>
+      <th md-column md-order-by="nameToLower">Owner's Name</th>
+      <th md-column>Phone Number</th>
+      <th md-column>Email</th>
+      <th md-column>Location</th>
+      <th md-column>BHK</th>
+      <th md-column>Multiple</th>
+      <th md-column>Society</th>
+      <th md-column>Input Source</th>
+    </thead>
+    <tbody md-body>
+      <!-- we can let ng-repeat sort the columns for us -->
+      <tr ng-repeat="data in main.customerData | filter:filter.name">
+        <td>{{data.owner_name}}</td>
+        <td>{{data.phone_number}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.location}}</td>
+        <td>{{data.bhk}}</td>
+        <td>{{data.multiple}}</td>
+        <td>{{data.society}}</td>
+        <td>{{data.input_source}}</td>
+        </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+
+
+    </div>
+
+
+    <div ng-controller="subController as sub" layout="column">
+        {{ sub.customerData }}
+    </div>
+
+    </body>
+</html>

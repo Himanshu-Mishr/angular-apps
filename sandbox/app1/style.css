@@ -1,0 +1,94 @@
+body {
+    background: #FAFAFA !important;
+}
+
+section {
+    background: #FAFAFA;
+}
+
+/* configuration for  toolbar*/
+md-toolbar {
+  max-height: 48px !important;
+  min-height: 48px !important;
+  background: rgb(59, 120, 231) !important;
+}
+
+
+/*
+  CSS config for the top search bar
+*/
+md-autocomplete {
+  background: #5A8DEB;
+}
+
+md-autocomplete:hover {
+  background: #6293EC;
+}
+
+md-autocomplete:focus  {
+  background-color: white;
+}
+
+md-autocomplete:active {
+  background-color: white;
+}
+
+.boxWithHeight {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+
+/* configuration for stats cards*/
+.stats-card {
+  color: white !important;
+  /*max-height: 100%;*/
+  /*min-height: 5%;*/
+}
+
+#stats-card1 {
+  background: #039BE5;
+}
+
+#stats-card2 {
+  background: #FFC107;
+}
+
+#stats-card3 {
+  background: #FF1744;
+}
+
+#stats-card4 {
+  background: #1DBF50;
+}
+
+
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px; }
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.inputdemoBasicUsage .md-datepicker-button {
+  width: 36px; }
+
+
+.subsidebar-root {
+  background: #FAFAFA;
+}
+
+.subsidebar:hover {
+  background: #E8E8E8;
+}
+
+.subsidebar-active {
+  color: #3B78E7;
+}
+.subsidebar-active:hover {
+  background: #D3E0F6;
+}

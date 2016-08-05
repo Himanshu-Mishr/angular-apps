@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Angular App</title>
+
+        <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+        <script src="bower_components/angular-material/angular-material.min.js"></script>
+        <!-- <script src="bower_components/angular-route/angular-route.min.js"></script> -->
+
+	<script src="app.js"></script>
+</head>
+<body ng-controller="mainController" ng-cloak layout="row" flex>
+	<md-content layout="column" flex="5" style="overflow:hidden;">
+        <md-list class="md-dense">
+            <md-list-item ng-click="goToThisPage(i)" layout-align="center" ng-repeat="i in [1, 2, 3, 4, 5]" md-ink-ripple>
+                <p style="text-align: center;">
+                    <md-icon md-font-set="material-icons"> dashboard </md-icon>
+                </p>
+                <md-tooltip md-direction="right">Search and Filter Payment</md-tooltip>
+            </md-list-item>
+        </md-list>
+    </md-content>
+
+    <md-divider></md-divider>
+    <div layout="column" flex>
+
+         {{  text }}
+
+    </div>
+    <md-divider></md-divider>
+    <md-content layout="column" flex="5" style="overflow:hidden;">
+        <md-list class="md-dense">
+                <md-list-item ng-click="routeToURL('/pl')" md-ink-ripple ng-class="{'subsidebar-active': pagename=='dashboard'}" layout-align="center">
+                    <p style="text-align: center">
+                        <md-icon ng-class="{'subsidebar-icon-active': pagename=='dashboard'}" md-font-set="material-icons"> dashboard </md-icon>
+                    </p>
+                    <md-tooltip md-direction="right">
+                      Dashboard
+                    </md-tooltip>
+                </md-list-item>
+                <md-list-item ng-click="routeToURL('/pl/search')" md-ink-ripple ng-class="{'subsidebar-active': pagename=='search'}" layout-align="center">
+                    <p style="text-align: center">
+                        <md-icon ng-class="{'subsidebar-icon-active': pagename=='search'}" md-font-set="material-icons"> filter_list </md-icon>
+                    </p>
+                    <md-tooltip md-direction="right">
+                      Search Property
+                    </md-tooltip>
+                </md-list-item>
+                <md-list-item ng-click="routeToURL('/pl/view/new')" md-ink-ripple ng-class="{'subsidebar-active': pagename=='edit'}" layout-align="center">
+                    <p style="text-align: center">
+                        <md-icon ng-class="{'subsidebar-icon-active': pagename=='edit'}" md-font-set="material-icons"> home </md-icon>
+                    </p>
+                    <md-tooltip md-direction="right">
+                      Create new property
+                    </md-tooltip>
+                </md-list-item>
+        </md-list>
+    </md-content>
+
+    <md-divider></md-divider>
+    <div layout="column" flex>
+
+         {{  text }}
+
+    </div>
+</body>
+</html>

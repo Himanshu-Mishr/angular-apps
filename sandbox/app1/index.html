@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Angular JS Libs -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+
+    <!-- custom JS files -->
+    <script src="app.js" type="text/javascript"></script>
+</head>
+
+<!--////////////////////////////////////////////////////////////////////////-->
+<body ng-app="MyApp" layout="column" class="icondemoFontIconsWithLigatures" ng-cloak>
+  <div>
+    <div ng-controller="NavigationBarController" layout="column" flex="100">
+
+        <md-toolbar class="md-whiteframe-2dp">
+          <div class="md-toolbar-tools">
+            <md-button ng-controller="SideBarController"  ng-click="toggleLeft()"
+                ng-hide="isOpenLeft()" class="md-icon-button" aria-label="Settings">
+              <md-icon md-svg-icon="ic_menu_48px.svg"></md-icon>
+            </md-button>
+            <h2>
+              <span>Cozee Homes</span>
+            </h2>
+            <span flex="40" flex-offset="20">
+                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in getMatches(searchText)" md-item-text="item.display">
+                  <md-item-template>
+                      <span md-highlight-text="searchText">{{ item.display }}</span>
+                  </md-item-template>
+                  <md-not-found>
+                      No Matches Found.
+                  </md-not-found>
+                </md-autocomplete>
+            </span>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Favorite">
+              <md-icon md-svg-icon="ic_favorite_48px.svg" style="color: greenyellow;"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="More">
+              <md-icon md-svg-icon="ic_more_vert_48px.svg"></md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
+
+        <div ng-controller="SideBarController" layout="column" ng-cloak>
+            <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+              <md-toolbar class="md-theme-light">
+                <div class="md-toolbar-tools">
+                <md-button ng-controller="LeftCtrl" ng-click="close()" class="md-icon-button" aria-label="More">
+                  <md-icon md-svg-icon="ic_arrow_back_48px.svg"></md-icon>
+                </md-button>
+                    <span>Options</span>
+                </div>
+              </md-toolbar>
+            </md-sidenav>
+        </div>
+    </div>
+  </div>
+
+<md-content layout="row" flex>
+
+  <!-- Sub Side bar  -->
+  <div flex="5" layout="column" class="boxWithHeight subsidebar-root">
+    <div flex="5">
+    </div>
+    <md-divider></md-divider>
+    <div flex>
+      <md-list layout-align="center center">
+        <md-list-item class="md-1-line subsidebar-active">
+        <div class="md-list-item-text" layout="column">
+          <md-icon class="md-body-1" md-svg-icon="home.svg" style="color: #3B78E7;" aria-label="Home Icon"></md-icon>
+        </div>
+        </md-list-item>
+
+        <md-list-item class="md-1-line subsidebar">
+        <div class="md-list-item-text" layout="column">
+          <md-icon class="md-body-1" md-svg-icon="task.svg" aria-label="My Task Icon"></md-icon>
+        </div>
+        </md-list-item>
+
+        <md-list-item class="md-1-line subsidebar">
+        <div class="md-list-item-text" layout="column">
+          <md-icon class="md-body-1" md-svg-icon="analysis.svg" aria-label="Analysis Icon"></md-icon></div>
+        </md-list-item>
+      </md-list>
+    </div>
+    <div flex>
+    </div>
+  </div>
+
+  <md-divider></md-divider>
+
+<!-- Center task column -->
+  <div flex layout="column">
+    <section layout="row" flex="5" layout-padding>
+    Some filter here.
+    </section>
+    <md-divider></md-divider>
+    <section layout="row" flex="10">
+      <div layout="column" flex>
+          <md-card  layout="row" id="stats-card1" class="stats-card">
+          <md-card-content>
+              <span class="md-body-1">Stage 1 : Introduction</span>
+          </md-card-content>
+          <md-card-content>
+              <span class="md-headline">56</span>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div layout="column" flex>
+          <md-card layout="row" id="stats-card2" class="stats-card">
+          <md-card-content>
+              <span class="md-body-1" >Stage 2 : On-boarding</span>
+          </md-card-content>
+          <md-card-content>
+              <span class="md-headline">35</span>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div layout="column" flex>
+          <md-card layout="row" id="stats-card3" class="stats-card">
+          <md-card-content>
+              <span class="md-body-1">Stage 3 : Negotiation</span>
+          </md-card-content>
+          <md-card-content>
+              <span class="md-headline">10</span>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div layout="column" flex>
+          <md-card layout="row" id="stats-card4" class="stats-card">
+          <md-card-content>
+              <span class="md-body-1">Stage 4 : Verification</span>
+          </md-card-content>
+          <md-card-content>
+              <span class="md-headline">75</span>
+          </md-card-content>
+        </md-card>
+      </div>
+    </section>
+
+    <section layout="row" flex style="overflow-x: hidden;" class="md-body-1">
+      <div layout="column" flex="25" style="overflow-x: hidden;" ng-init="x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]">
+        <md-card ng-controller="dialogCtrl" class="md-secondary" ng-click="showAdvanced($event)" ng-repeat="p in x">
+          <md-card-content layout="column">
+              <span class="md-subhead">{{ p }}</span>
+              <span>Content of the card : line 2</span>
+          </md-card-content>
+        </md-card>
+      </div>
+
+      <div layout="column" flex="25" style="overflow-x: hidden;" ng-init="x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]">
+        <md-card ng-controller="dialogCtrl" class="md-secondary" ng-click="showAdvanced($event)" ng-repeat="p in x">
+          <md-card-content layout="column">
+              <span class="md-subhead">{{ p }}</span>
+              <span>Content of the card : line 2</span>
+          </md-card-content>
+        </md-card>
+      </div>
+
+      <div layout="column" flex="25" style="overflow-x: hidden;" ng-init="x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]">
+        <md-card ng-controller="dialogCtrl" class="md-secondary" ng-click="showAdvanced($event)" ng-repeat="p in x">
+          <md-card-content layout="column">
+              <span class="md-subhead">{{ p }}</span>
+              <span>Content of the card : line 2</span>
+          </md-card-content>
+        </md-card>
+      </div>
+
+      <div layout="column" flex="25" style="overflow-x: hidden;" ng-init="x=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]">
+        <md-card ng-controller="dialogCtrl" class="md-secondary" ng-click="showAdvanced($event)" ng-repeat="p in x">
+          <md-card-content layout="column">
+              <span class="md-subhead">{{ p }}</span>
+              <span>Content of the card : line 2</span>
+          </md-card-content>
+        </md-card>
+      </div>
+    </section>
+  </div>
+
+<md-divider></md-divider>
+
+<div flex="15" layout="column" style="overflow-x: hidden;">
+      <div style="overflow-x: hidden;">
+
+<md-content>
+  <md-list class="md-body-1">
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+        <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+        <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+        <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+    <md-list-item class="md-1-line">
+      some task information
+    </md-list-item>
+    <md-divider ></md-divider>
+  </md-list>
+  </md-content>
+
+      </div>
+</div>
+</md-content>
+
+<!--////////////////////////////////////////////////////////////////////////-->
+</body>
+</html>

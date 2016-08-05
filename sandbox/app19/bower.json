@@ -1,0 +1,22 @@
+{
+  "name": "app19",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Himanshu Mishra <himanshu.m786@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "angular-material": "^1.0.9"
+  }
+}

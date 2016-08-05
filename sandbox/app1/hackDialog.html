@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- Angular JS Libs -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+
+    <!-- custom JS files -->
+    <script src="app.js" type="text/javascript"></script>
+    <style>
+body {
+  padding:100px;
+}
+.md-button {
+  margin-left:50px;
+  text-transform: none;
+  padding:10px;
+  padding-left:15px;
+  padding-right:15px;
+
+}
+
+.intro {
+  margin-top:-50px;
+  padding-left:75px;
+  width:520px;
+}
+
+    </style>
+</head>
+
+<!--////////////////////////////////////////////////////////////////////////-->
+<body layout="column">
+
+
+
+<div  ng-app="demoApp" ng-controller="EmployeeController">
+  <md-button ng-click="showAlert()" class="md-raised md-warn">
+    Employee Alert!
+  </md-button>
+  <md-button ng-click="closeAlert()" ng-disabled="!hasAlert()" class="md-raised">
+    Close Alert
+  </md-button>
+  <md-button class="md-raised md-primary" ng-click="showGreeting($event)">
+    Greet Employee
+  </md-button>
+</div>
+
+
+<!--////////////////////////////////////////////////////////////////////////-->
+</body>
+<script>
+
+(function(angular, undefined){
+  "use strict";
+
+  angular
+    .module('demoApp', ['ngMaterial'])
+    .controller('EmployeeController', EmployeeEditor)
+    .controller('GreetingController', GreetingController);
+
+  // Fictitious Employee Editor to show how to use simple and complex dialogs.
+
+  function EmployeeEditor($scope, $mdDialog) {
+    var alert;
+
+    // this method will handle incoming alert after pressing button.
+    $scope.showAlert = showAlert;
+
+    // this method will handle incoming alert after pressing button
+    $scope.closeAlert = closeAlert;
+
+    // simply show greeting
+    $scope.showGreeting = showCustomGreeting;
+
+
+    $scope.hasAlert = function() { return !!alert; };
+    $scope.userName = $scope.userName || 'Bobby';
+
+    // Dialog #1 - Show simple alert dialog and cache
+    // reference to dialog instance
+
+    function showAlert() {
+      alert = $mdDialog.alert()
+        .title('Attention, ' + $scope.userName)
+        .content('This is an example of how easy dialogs can be!')
+        .ok('Close');
+
+      $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
+    }
+
+    // Close the specified dialog instance and resolve with 'finished' flag
+    // Normally this is not needed, just use '$mdDialog.hide()' to close
+    // the most recent dialog popup.
+
+    function closeAlert() {
+      $mdDialog.hide( alert, "finished" );
+      alert = undefined;
+    }
+
+    // Dialog #2 - Demonstrate more complex dialogs construction and popup.
+
+    function showCustomGreeting($event) {
+        $mdDialog.show({
+          targetEvent: $event,
+          template:
+            '<md-dialog>' +
+            '  <md-content>Hello {{ employee }}!</md-content>' +
+            '  <div class="md-actions">' +
+            '    <md-button ng-click="closeDialog()">' +
+            '      Close Greeting' +
+            '    </md-button>' +
+            '  </div>' +
+            '</md-dialog>',
+          controller: 'GreetingController',
+          onComplete: afterShowAnimation,
+          locals: { employee: $scope.userName }
+        });
+
+        // When the 'enter' animation finishes...
+
+        function afterShowAnimation(scope, element, options) {
+           // post-show code here: DOM element focus, etc.
+           console.log("submitting the information to server");
+        }
+    }
+  }
+
+  // Greeting controller used with the more complex 'showCustomGreeting()' custom dialog
+
+  function GreetingController($scope, $mdDialog, employee) {
+    // Assigned from construction <code>locals</code> options...
+    $scope.employee = employee;
+
+    $scope.closeDialog = function() {
+      // Easily hides most recent dialog shown...
+      // no specific instance reference is needed.
+      $mdDialog.hide();
+    };
+  }
+
+})(angular);
+
+
+</script>
+</html>

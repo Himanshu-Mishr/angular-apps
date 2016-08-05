@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Angular App</title>
+
+	<!-- angular material css -->
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+
+	<!-- custom css -->
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<!-- angular libraries -->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+	<script src="bower_components/angular-material/angular-material.js"></script>
+
+	<!-- application js file -->
+	<script src="core/app.module.js"></script>
+	<script src="core/core.module.js"></script>
+	<script src="core/config.module.js"></script>
+
+	<script src="services/apimanager.services.js"></script>
+	<script src="services/datamanager.services.js"></script>
+
+	<script src="route/app.route.js"></script>
+
+	<script src="controllers/dashboard.controller.js"></script>
+	<script src="controllers/customers.controller.js"></script>
+
+	<script src="factories/payment.factory.js"></script>
+
+	<script src="components/showCredit.directive.js"></script>
+	<script src="components/calendar.directive.js"></script>
+
+	<script src="filters/wrapParagraph.filter.js"></script>
+
+</head>
+<body ng-controller="MainController as ctrl">
+
+{{ ctrl.text }}
+
+<br><br><br><br><br>
+
+<!-- filter example -->
+{{ 'asdlfkasdlkfhoisflnf lkas flsadf kasdjf lsadknl' | wrapParagraph:0:25 }}
+
+</body>
+</html>

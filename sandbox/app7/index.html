@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0px;
+        }
+        md-list-item {
+            min-height: 0px !important;
+        }
+        md-card {
+            min-height: 7vh;
+            max-height: 7vh;
+            background: #EBFECA;
+        }
+    </style>
+</head>
+    <body ng-controller="MyController" ng-cloak style="height:100vh;">
+
+
+
+    <div layout="row">
+        <span flex></span>
+        <md-input-container flex="50">
+        <label>Filter</label>
+        <input ng-model="username" autofocus>
+        </md-input-container>
+        <span flex></span>
+        <div my-customer></div>
+    </div>
+
+<fetch_count>
+</fetch_count>
+
+<div ng-controller="customerController">
+
+    <customer type="Name"></customer>
+    <customer type="Gender"></customer>
+    <customer type="Comment"></customer>
+</div>
+
+
+    <div layout="row" style="height:82vh;">
+        <div layout="column" flex style="overflow-x: hidden;" id="popupContainer">
+            <div ng-click="showAdvanced($event, item)" ng-repeat="item in itemList | filter:username" ng-if="item.stage==1">
+                <owner info="item"></owner>
+            </div>
+        </div>
+        <div layout="column" flex  style="overflow-x: hidden;">
+                <div ng-click="showAdvanced($event, item)" ng-repeat="item in itemList | filter:username" ng-if="item.stage==2">
+                <owner info="item"></owner>
+            </div>
+        </div>
+        <div layout="column" flex  style="overflow-x: hidden;">
+            <div ng-click="showAdvanced($event, item)" ng-repeat="item in itemList | filter:username" ng-if="item.stage==3">
+                <owner info="item"></owner>
+            </div>
+        </div>
+        <div layout="column" flex  style="overflow-x: hidden;">
+            <div ng-click="showAdvanced($event, item)" ng-repeat="item in itemList | filter:username" ng-if="item.stage==4">
+                <owner info="item"></owner>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

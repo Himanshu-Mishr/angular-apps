@@ -1,0 +1,19 @@
+{
+  "name": "app12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-angular-htmlify": "^2.3.0",
+    "gulp-inject": "^4.1.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-stream": "^3.2.0"
+  }
+}
